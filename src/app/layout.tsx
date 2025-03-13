@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aiden Labs NFT Drop",
+  title: "Maiden NFT Drop",
   description: "NFT Drop powered by Aiden Labs",
 };
 
