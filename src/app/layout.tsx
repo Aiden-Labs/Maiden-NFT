@@ -3,6 +3,8 @@ import { Providers } from "@/components/providers";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { headers } from "next/headers";
+import Image from "next/image";
+import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -34,10 +36,16 @@ export default async function RootLayout({
           <Navbar />
           {children}
         </Providers>
-        <footer className="py-6 text-center text-muted-foreground">
-          <p>
-            &copy; {new Date().getFullYear()} Liteflow. All rights reserved.
-          </p>
+        <footer className="text-center text-sm text-muted-foreground py-8 flex justify-center items-center gap-1">
+          Powered by{" "}
+          <Link href="https://liteflow.com">
+            <Image
+              src="/liteflow.svg"
+              alt="Liteflow Logo"
+              width={96}
+              height={24}
+            />
+          </Link>
         </footer>
       </body>
     </html>

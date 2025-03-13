@@ -90,3 +90,7 @@
     @apply bg-background text-foreground;
   }
 }
+
+.quests header {
+  @apply border-0 bg-transparent;
+}

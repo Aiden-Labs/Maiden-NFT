@@ -43,13 +43,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           {!isMenuOpen && (
             <Button asChild>
-              <a
-                href="https://quest.aidenlabs.ai/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Join Quest
-              </a>
+              <Link href="/quests">Join Quest</Link>
             </Button>
           )}
 
@@ -112,13 +106,7 @@ export function Navbar() {
                 asChild
                 onClick={() => setIsMenuOpen(false)}
               >
-                <a
-                  href="https://quest.aidenlabs.ai/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Join Quest
-                </a>
+                <Link href="/quests">Join Quest</Link>
               </Button>
             </div>
           </div>
