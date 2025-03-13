@@ -15,7 +15,14 @@ export default function QuestPage() {
     );
   return (
     <div className="mx-auto container px-4 py-10 sm:px-6 lg:px-8 mt-14 quests">
-      <Header /> {isConnected ? <Quests /> : <Login />}
+      <Header /> 
+      {isConnected ? (
+        <Quests />
+      ) : (
+        <div className="flex w-full justify-center items-center">
+          <Login />
+        </div>
+      )}
     </div>
   );
 }
