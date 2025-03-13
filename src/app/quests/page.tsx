@@ -14,7 +14,7 @@ export default function QuestPage() {
       </div>
     );
   return (
-    <div className="mx-auto container px-4 py-10 sm:px-6 lg:px-8 mt-14">
+    <div className="mx-auto container px-4 py-10 sm:px-6 lg:px-8 mt-14 quests">
       <Header /> {isConnected ? <Quests /> : <Login />}
     </div>
   );
