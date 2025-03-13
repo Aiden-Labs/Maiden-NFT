@@ -1,0 +1,3 @@
+[submodule "pointfi-starter-kit"]
+	path = pointfi-starter-kit
+	url = https://github.com/liteflow-labs/pointfi-starter-kit
