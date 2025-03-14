@@ -13,7 +13,9 @@ export default function useMintAuthorization(
     address: account.address,
     query: {
       enabled:
-        account.isConnected && !drop.currency.address && BigInt(drop.price) > 0,
+        account.isConnected &&
+        !drop.currency.address &&
+        BigInt(drop.price) > BigInt(0),
     },
   });
   const tokenBalance = useReadContract({
@@ -27,7 +29,7 @@ export default function useMintAuthorization(
       enabled:
         account.isConnected &&
         !!drop.currency.address &&
-        BigInt(drop.price) > 0,
+        BigInt(drop.price) > BigInt(0),
     },
   });
 
@@ -38,7 +40,7 @@ export default function useMintAuthorization(
 
   const hasBalance = useMemo(() => {
     if (isLoading) return false;
-    if (BigInt(drop.price) === 0n) return true;
+    if (BigInt(drop.price) === BigInt(0)) return true;
     if (!drop.currency.address) {
       if (nativeBalance.data === undefined) return true;
       return nativeBalance.data.value >= amount;
