@@ -12,14 +12,13 @@ export default function MintProgress({
     if (!drop.supply) return 0;
     return (parseInt(drop.supplyMinted) / drop.supply) * 100;
   }, [drop.supply, drop.supplyMinted]);
+  if (!drop.isUserEligible) return null;
   return (
     <div className="space-y-2 w-full">
       <div className="flex justify-between text-sm">
         <span>Total Minted</span>
         {drop.supply ? (
-          <span>
-            {progress.toFixed(2)}% ({drop.supplyMinted || 0} / {drop.supply})
-          </span>
+          <span>{progress.toFixed(2)}%</span>
         ) : (
           <span>{drop.supplyMinted || 0}</span>
         )}
