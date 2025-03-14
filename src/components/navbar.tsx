@@ -9,9 +9,9 @@ const navItems = [
   { name: "Services", href: "https://www.aidenlabs.ai/#service" },
   { name: "Products", href: "https://www.aidenlabs.ai/#products" },
   { name: "FAQs", href: "https://www.aidenlabs.ai/#faqs" },
-  { name: "Contact Us", href: "https://www.aidenlabs.ai/#contact" },
   { name: "Blog", href: "https://www.aidenlabs.ai/blog" },
   { name: "Whitepaper", href: "https://aiden-labs.gitbook.io/aiden-labs" },
+  { name: "Aiden Quest", href: "/quests" },
 ];
 
 export function Navbar() {
@@ -33,9 +33,13 @@ export function Navbar() {
         <div className="hidden md:flex items-center gap-2">
           {navItems.map((item) => (
             <Button asChild key={item.name} variant="ghost">
-              <a href={item.href} target="_blank" rel="noopener noreferrer">
-                {item.name}
-              </a>
+              {item.href.startsWith("/") ? (
+                <Link href={item.href}>{item.name}</Link>
+              ) : (
+                <a href={item.href} target="_blank" rel="noopener noreferrer">
+                  {item.name}
+                </a>
+              )}
             </Button>
           ))}
         </div>
@@ -43,7 +47,7 @@ export function Navbar() {
         <div className="flex items-center gap-2">
           {!isMenuOpen && (
             <Button asChild>
-              <Link href="/quests">Join Quest</Link>
+              <Link href="/">Mint Now</Link>
             </Button>
           )}
 
@@ -96,9 +100,17 @@ export function Navbar() {
                   asChild
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <a href={item.href} target="_blank" rel="noopener noreferrer">
-                    {item.name}
-                  </a>
+                  {item.href.startsWith("/") ? (
+                    <Link href={item.href}>{item.name}</Link>
+                  ) : (
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.name}
+                    </a>
+                  )}
                 </Button>
               ))}
               <Button
@@ -106,7 +118,7 @@ export function Navbar() {
                 asChild
                 onClick={() => setIsMenuOpen(false)}
               >
-                <Link href="/quests">Join Quest</Link>
+                <Link href="/">Mint Now</Link>
               </Button>
             </div>
           </div>
