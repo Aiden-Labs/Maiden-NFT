@@ -44,8 +44,8 @@ export default function useMintAuthorization(
   const error = useMemo(() => {
     if (isLoading) return null;
     if (!account.isConnected) return "Please connect your wallet";
-    if (!hasBalance) return "Insufficient balance";
     if (!drop.isUserEligible) return "You are not eligible";
+    if (!hasBalance) return "Insufficient balance";
     return null;
   }, [account.isConnected, hasBalance, drop.isUserEligible, isLoading]);
 
