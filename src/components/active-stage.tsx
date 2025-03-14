@@ -49,7 +49,7 @@ export default function ActiveStage({
 
   return (
     <Card>
-      <CardHeader className="flex flex-row gap-4 space-y-0">
+      <CardHeader className="flex flex-col lg:flex-row gap-4 space-y-0">
         <Badge variant="secondary">
           <DropStatus status={drop.status} startDate={drop.startDate} />
         </Badge>

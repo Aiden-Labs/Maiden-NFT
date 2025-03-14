@@ -30,6 +30,7 @@ export default function Drop() {
   const chain = useMemo(() => (client ? client.chain : null), [client]);
   const currentDrop = useMemo(() => {
     if (!drops.data) return null;
+    if (drops.data.data[0].status === "UPCOMING") return drops.data.data[0];
     const live = drops.data.data.find((drop) => drop.status === "LIVE");
     if (live) return live;
     return drops.data.data[drops.data.data.length - 1];

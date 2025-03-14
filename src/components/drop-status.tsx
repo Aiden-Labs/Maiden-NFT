@@ -22,7 +22,8 @@ export default function DropStatus({
   if (status === "UPCOMING")
     return (
       <span className={cn("flex gap-2 items-center", className)}>
-        START IN <Countdown targetDate={startDate} />{" "}
+        <span className="min-w-14">START IN</span>
+        <Countdown targetDate={startDate} />{" "}
       </span>
     );
 }

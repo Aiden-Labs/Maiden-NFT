@@ -22,7 +22,7 @@ export default function MintStage({
   return (
     <Card key={drop.id} className={cn(selected && "border-primary")}>
       <CardHeader>
-        <CardTitle className="flex justify-between items-center">
+        <CardTitle className="flex flex-col md:flex-row justify-start md:justify-between items-start md:items-center">
           <Badge variant="secondary">
             {drop.hasAllowList && <LockIcon className="mr-1.5 size-3" />}
             {drop.name}
