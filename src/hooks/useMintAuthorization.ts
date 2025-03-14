@@ -11,7 +11,10 @@ export default function useMintAuthorization(
   const nativeBalance = useBalance({
     chainId: drop.chainId,
     address: account.address,
-    query: { enabled: account.isConnected && !drop.currency.address },
+    query: {
+      enabled:
+        account.isConnected && !drop.currency.address && BigInt(drop.price) > 0,
+    },
   });
   const tokenBalance = useReadContract({
     abi: erc20Abi,
@@ -20,7 +23,12 @@ export default function useMintAuthorization(
     address: drop.currency.address! as `0x${string}`,
     args: [account.address!],
     functionName: "balanceOf",
-    query: { enabled: account.isConnected && !!drop.currency.address },
+    query: {
+      enabled:
+        account.isConnected &&
+        !!drop.currency.address &&
+        BigInt(drop.price) > 0,
+    },
   });
 
   const isLoading = useMemo(
@@ -29,13 +37,22 @@ export default function useMintAuthorization(
   );
 
   const hasBalance = useMemo(() => {
+    if (isLoading) return false;
+    if (BigInt(drop.price) === 0n) return true;
     if (!drop.currency.address) {
-      if (!nativeBalance.data) return false;
+      if (nativeBalance.data === undefined) return true;
       return nativeBalance.data.value >= amount;
     }
-    if (!tokenBalance.data) return false;
+    if (tokenBalance.data === undefined) return true;
     return tokenBalance.data >= amount;
-  }, [amount, nativeBalance.data, tokenBalance.data, drop.currency.address]);
+  }, [
+    isLoading,
+    amount,
+    nativeBalance.data,
+    tokenBalance.data,
+    drop.currency.address,
+    drop.price,
+  ]);
 
   const isAuthorized = useMemo(() => {
     return hasBalance && drop.isUserEligible;
@@ -44,8 +61,8 @@ export default function useMintAuthorization(
   const error = useMemo(() => {
     if (isLoading) return null;
     if (!account.isConnected) return "Please connect your wallet";
-    if (!drop.isUserEligible) return "You are not eligible";
     if (!hasBalance) return "Insufficient balance";
+    if (!drop.isUserEligible) return "You are not eligible";
     return null;
   }, [account.isConnected, hasBalance, drop.isUserEligible, isLoading]);
 
