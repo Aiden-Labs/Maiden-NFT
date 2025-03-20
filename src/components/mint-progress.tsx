@@ -14,7 +14,7 @@ export default function MintProgress({
   }, [drop.supply, drop.supplyMinted]);
   if (!drop.isUserEligible) return null;
   return (
-    <div className="space-y-2 w-full">
+    <div className="w-full space-y-2">
       <div className="flex justify-between text-sm">
         <span>Total Minted</span>
         {drop.supply ? (

@@ -22,7 +22,7 @@ export default function MintStage({
   return (
     <Card key={drop.id} className={cn(selected && "border-primary")}>
       <CardHeader>
-        <CardTitle className="flex flex-col md:flex-row justify-start md:justify-between items-start md:items-center">
+        <CardTitle className="flex flex-col items-start justify-start md:flex-row md:items-center md:justify-between">
           <Badge variant="secondary">
             {drop.hasAllowList && <LockIcon className="mr-1.5 size-3" />}
             {drop.name}
@@ -37,9 +37,9 @@ export default function MintStage({
           {drop.hasAllowList && (
             <span>
               {drop.isUserEligible ? (
-                <CheckIcon className="text-green-500 inline-block size-3" />
+                <CheckIcon className="inline-block size-3 text-green-500" />
               ) : (
-                <XIcon className="text-red-500 inline-block size-3" />
+                <XIcon className="inline-block size-3 text-red-500" />
               )}{" "}
               Allowlist -{" "}
             </span>

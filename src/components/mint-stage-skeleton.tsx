@@ -11,12 +11,12 @@ export default function MintStageSkeleton() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="flex justify-between items-center">
-          <Skeleton className="w-24 h-6" />
-          <Skeleton className="w-16 h-4" />
+        <CardTitle className="flex items-center justify-between">
+          <Skeleton className="h-6 w-24" />
+          <Skeleton className="h-4 w-16" />
         </CardTitle>
         <CardDescription>
-          <Skeleton className="w-32 h-4" />
+          <Skeleton className="h-4 w-32" />
         </CardDescription>
       </CardHeader>
     </Card>

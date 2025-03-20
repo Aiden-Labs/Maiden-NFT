@@ -66,13 +66,29 @@ NEXT_PUBLIC_COLLECTION_CHAIN=
 
 # Set your NFT collection contract address
 NEXT_PUBLIC_COLLECTION_ADDRESS=
+
+# Optional provider URL
+NEXT_PUBLIC_ETHEREUM_MAINNET_PROVIDER_URL=
+NEXT_PUBLIC_ETHEREUM_SEPOLIA_PROVIDER_URL=
+NEXT_PUBLIC_BSC_MAINNET_PROVIDER_URL=
+NEXT_PUBLIC_BSC_TESTNET_PROVIDER_URL=
+NEXT_PUBLIC_POLYGON_MAINNET_PROVIDER_URL=
+NEXT_PUBLIC_POLYGON_AMOY_PROVIDER_URL=
+NEXT_PUBLIC_BASE_MAINNET_PROVIDER_URL=
+NEXT_PUBLIC_BASE_SEPOLIA_PROVIDER_URL=
+NEXT_PUBLIC_NEONEVM_MAINNET_PROVIDER_URL=
+NEXT_PUBLIC_NEONEVM_DEVNET_PROVIDER_URL=
+NEXT_PUBLIC_LIGHTLINK_PEGASUS_PROVIDER_URL=
+NEXT_PUBLIC_LIGHTLINK_PHOENIX_PROVIDER_URL=
+NEXT_PUBLIC_ARBITRUM_ONE_PROVIDER_URL=
+NEXT_PUBLIC_ARBITRUM_SEPOLIA_PROVIDER_URL=
 ```
 
 ## Technology Stack
 
 - **Frontend Framework:** [Next.js](https://nextjs.org/) with TypeScript
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/) with [shadcn/ui](https://ui.shadcn.com/) components
-- **Web3 Integration:** 
+- **Web3 Integration:**
   - [Wagmi](https://wagmi.sh/) for React hooks for Ethereum
   - [RainbowKit](https://www.rainbowkit.com/) for wallet connection
 - **NFT Management:** [Liteflow SDK](https://docs.liteflow.com/) for drop management and NFT operations

@@ -39,7 +39,7 @@ export default function Drop() {
   if (collection.error) throw new Error(collection.error.message);
   if (collection.isLoading)
     return (
-      <div className="flex h-screen w-full justify-center items-center">
+      <div className="flex h-screen w-full items-center justify-center">
         <Loader2Icon className="size-10 animate-spin" />
       </div>
     );
@@ -49,21 +49,21 @@ export default function Drop() {
     <>
       <div className="relative">
         <div className="absolute inset-0 -z-20 overflow-hidden">
-          <div className="relative h-full flex items-center">
+          <div className="relative flex h-full items-center">
             {collection.data.image && (
               <Image
                 src={collection.data.image}
                 alt={collection.data.name}
                 width={1000}
                 height={1000}
-                className="min-w-full min-h-full object-cover blur-3xl opacity-10"
+                className="min-h-full min-w-full object-cover opacity-10 blur-3xl"
               />
             )}
           </div>
         </div>
 
-        <div className="container mx-auto py-28">
-          <header className="p-4 flex flex-col md:flex-row md:items-center gap-4">
+        <div className="container mx-auto py-12">
+          <header className="flex flex-col gap-4 p-4 md:flex-row md:items-center">
             <h1 className="text-4xl font-semibold">{collection.data.name}</h1>
             {chain && (
               <span>
@@ -72,7 +72,7 @@ export default function Drop() {
             )}
           </header>
 
-          <main className="container mx-auto p-4 grid md:grid-cols-2 gap-6 md:gap-12 lg:gap-24">
+          <main className="container mx-auto grid gap-6 p-4 md:grid-cols-2 md:gap-12 lg:gap-24">
             <Card className="aspect-square overflow-hidden">
               {collection.data.image && (
                 <Image
@@ -86,7 +86,7 @@ export default function Drop() {
             </Card>
 
             <div className="space-y-6">
-              <Card className="bg-transparent shadow-none md:shadow md:bg-card/50 border-0 md:border">
+              <Card className="border-0 bg-transparent shadow-none md:border md:bg-card/50 md:shadow">
                 <CardHeader className="px-0 md:px-6">
                   <CardTitle>Mint Stages</CardTitle>
                 </CardHeader>
@@ -117,7 +117,7 @@ export default function Drop() {
 
       <Separator />
 
-      <div className="container mx-auto p-4 mt-8">
+      <div className="container mx-auto mt-8 p-4">
         <Tabs defaultValue="overview">
           <TabsList>
             <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -131,7 +131,7 @@ export default function Drop() {
                     href={`${chain.blockExplorers?.default.url}/address/${collection.data.address}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex gap-2 items-center"
+                    className="flex items-center gap-2"
                   >
                     <ExternalLinkIcon className="h-4 w-4" />
                     Contract {collection.data.address.slice(0, 6)}...
@@ -176,7 +176,7 @@ export default function Drop() {
                 </Button>
               )}
             </nav>
-            <p className="text-sm text-muted-foreground whitespace-pre-line">
+            <p className="whitespace-pre-line text-sm text-muted-foreground">
               {collection.data.description}
             </p>
           </TabsContent>

@@ -51,7 +51,7 @@ export default function NumberInput({
         min={min}
         max={max}
         step={step}
-        className="w-20 text-center [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none rounded-none border-x-0"
+        className="w-20 rounded-none border-x-0 text-center [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
       />
       <Button
         variant="secondary"

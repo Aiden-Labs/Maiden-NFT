@@ -49,13 +49,13 @@ export default function ActiveStage({
 
   return (
     <Card>
-      <CardHeader className="flex flex-col lg:flex-row gap-4 space-y-0">
+      <CardHeader className="flex flex-col gap-4 space-y-0 lg:flex-row">
         <Badge variant="secondary">
           <DropStatus status={drop.status} startDate={drop.startDate} />
         </Badge>
         <MintProgress drop={drop} />
       </CardHeader>
-      <CardContent className="space-y-4 flex items-center justify-between">
+      <CardContent className="flex items-center justify-between space-y-4">
         <div>
           {BigInt(drop.price) > BigInt(0) ? (
             <div className="space-y-1">

@@ -52,7 +52,7 @@ export default function SuccessModal({
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 w-full"
+                className="flex w-full items-center gap-2"
               >
                 View on Explorer
                 <ExternalLink className="h-4 w-4" />

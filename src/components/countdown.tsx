@@ -51,7 +51,7 @@ export default function Countdown({ targetDate }: CountdownProps) {
   }, [calculateTimeLeft]);
 
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex items-center justify-center">
       <div className="flex gap-2">
         {[
           timeLeft.days,
@@ -61,9 +61,9 @@ export default function Countdown({ targetDate }: CountdownProps) {
         ].map((item, index) => (
           <div
             key={index}
-            className="bg-muted rounded-lg px-2 py-1 flex items-center justify-center"
+            className="flex items-center justify-center rounded-lg bg-muted px-2 py-1"
           >
-            <span className="font-mono text-s font-bold">{item}</span>
+            <span className="text-s font-mono font-bold">{item}</span>
           </div>
         ))}
       </div>
