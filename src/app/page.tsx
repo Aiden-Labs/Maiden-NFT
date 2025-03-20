@@ -62,7 +62,7 @@ export default function Drop() {
           </div>
         </div>
 
-        <div className="container mx-auto py-12">
+        <div className="container mx-auto py-28">
           <header className="flex flex-col gap-4 p-4 md:flex-row md:items-center">
             <h1 className="text-4xl font-semibold">{collection.data.name}</h1>
             {chain && (
