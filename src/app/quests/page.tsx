@@ -10,15 +10,15 @@ export default function QuestPage() {
   const { isConnected, isConnecting, isReconnecting } = useAccount();
   if (isConnecting || isReconnecting)
     return (
-      <div className="flex h-screen w-full justify-center items-center">
+      <div className="flex h-screen w-full items-center justify-center">
         <Loader2Icon className="size-10 animate-spin" />
       </div>
     );
   return (
     <div className="relative">
-      <div className="mx-auto container px-4 py-10 sm:px-6 lg:px-8 mt-14 quests space-y-4">
+      <div className="quests container mx-auto mt-14 space-y-4 px-4 py-10 sm:px-6 lg:px-8">
         <Header />
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid gap-6 md:grid-cols-3">
           <div className="md:col-span-2">
             <Quests />
           </div>
@@ -27,8 +27,8 @@ export default function QuestPage() {
           </div>
         </div>
         {!isConnected && (
-          <div className="fixed inset-0 flex justify-center items-center">
-            <div className="fixed w-full h-full backdrop-blur"></div>
+          <div className="fixed inset-0 flex items-center justify-center">
+            <div className="fixed h-full w-full backdrop-blur"></div>
             <div className="z-10">
               <Login />
             </div>

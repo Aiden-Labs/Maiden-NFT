@@ -18,8 +18,8 @@ export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="w-full max-w-4xl mx-auto px-4 py-4 fixed z-40 top-0 left-0 right-0">
-      <div className="flex items-center justify-between bg-muted dark:bg-black rounded-md p-2 backdrop-blur-sm border">
+    <nav className="fixed left-0 right-0 top-0 z-40 mx-auto w-full max-w-4xl px-4 py-4">
+      <div className="flex items-center justify-between rounded-md border bg-muted p-2 backdrop-blur-sm dark:bg-black">
         <Link href="https://www.aidenlabs.ai/" className="flex items-center">
           <Image
             src="/logo.avif"
@@ -30,7 +30,7 @@ export function Navbar() {
           />
         </Link>
 
-        <div className="hidden md:flex items-center gap-2">
+        <div className="hidden items-center gap-2 md:flex">
           {navItems.map((item) => (
             <Button asChild key={item.name} variant="ghost">
               {item.href.startsWith("/") ? (
@@ -65,9 +65,9 @@ export function Navbar() {
 
       {/* Mobile menu - Extension of current menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-0 left-0 right-0 p-4 z-50">
-          <div className="bg-muted dark:bg-black border rounded-md shadow-lg p-2 max-w-4xl mx-auto">
-            <div className="flex items-center justify-between pb-2 mb-2">
+        <div className="absolute left-0 right-0 top-0 z-50 p-4 md:hidden">
+          <div className="mx-auto max-w-4xl rounded-md border bg-muted p-2 shadow-lg dark:bg-black">
+            <div className="mb-2 flex items-center justify-between pb-2">
               <Link
                 href="https://www.aidenlabs.ai/"
                 className="flex items-center"

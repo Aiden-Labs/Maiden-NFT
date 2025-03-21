@@ -36,7 +36,7 @@ export default async function RootLayout({
           <Navbar />
           {children}
         </Providers>
-        <footer className="text-center text-sm text-muted-foreground py-8 flex justify-center items-center gap-1">
+        <footer className="flex items-center justify-center gap-1 py-8 text-center text-sm text-muted-foreground">
           Powered by{" "}
           <Link href="https://liteflow.com">
             <Image
