@@ -1,13 +1,42 @@
 "use client";
 import { Header } from "@/components/header";
 import Leaderboard from "@/components/leaderboard";
+import { leaderboardPositionQueryKey } from "@/hooks/useLeaderboardPosition";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loader2Icon } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo } from "react";
 import { useAccount } from "wagmi";
 import Login from "../../../pointfi-starter-kit/src/app/(disconnected)/login/page";
 import Quests from "../../../pointfi-starter-kit/src/components/quests";
 
 export default function QuestPage() {
-  const { isConnected, isConnecting, isReconnecting } = useAccount();
+  const searchParams = useSearchParams();
+  const { isConnected, isConnecting, isReconnecting, address } = useAccount();
+  const questId = useMemo(() => searchParams.get("ref"), [searchParams]);
+  const queryClient = useQueryClient();
+  const { mutate: createReferralAchievement } = useMutation({
+    mutationFn: async ({ address }: { address: string }) => {
+      const response = await fetch(`/quests/${questId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ address }),
+      });
+      if (!response.ok) throw new Error("Failed to create achievement");
+      await queryClient.invalidateQueries({
+        queryKey: leaderboardPositionQueryKey(address),
+      });
+      return response;
+    },
+  });
+
+  useEffect(() => {
+    if (!questId) return;
+    if (!isConnected) return;
+    if (!address) return;
+    void createReferralAchievement({ address });
+  }, [questId, isConnected, createReferralAchievement, address]);
+
   if (isConnecting || isReconnecting)
     return (
       <div className="flex h-screen w-full items-center justify-center">
