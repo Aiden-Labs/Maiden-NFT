@@ -1,12 +1,27 @@
 import liteflow from "@/lib/liteflow";
-import kols from "../../../../kol.json";
+import { z } from "zod";
+
+const schema = z.record(z.string().uuid(), z.string());
+
+function getSecret(id: string) {
+  const kols = process.env.KOLS;
+  if (!kols) return null;
+  try {
+    // Encode with Buffer.from(JSON.stringify(obj)).toString("base64")
+    const payload = JSON.parse(Buffer.from(kols, "base64").toString("utf-8"));
+    const parsed = schema.parse(payload);
+    return parsed[id];
+  } catch {
+    return null;
+  }
+}
 
 export async function POST(
   request: Request,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  const id = (await params).id as keyof typeof kols;
-  const secret = kols[id];
+  const id = (await params).id;
+  const secret = getSecret(id);
   const { address } = await request.json();
   if (!secret) return new Response("Invalid quest ID", { status: 400 });
   if (!address) return new Response("Missing address", { status: 400 });
