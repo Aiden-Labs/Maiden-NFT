@@ -34,7 +34,7 @@ export default function QuestPage() {
     if (!questId) return;
     if (!isConnected) return;
     if (!address) return;
-    void createReferralAchievement({ address });
+    createReferralAchievement({ address });
   }, [questId, isConnected, createReferralAchievement, address]);
 
   if (isConnecting || isReconnecting)
