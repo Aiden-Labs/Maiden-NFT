@@ -8,7 +8,9 @@ function getSecret(id: string) {
   if (!kols) return null;
   try {
     // Encode with Buffer.from(JSON.stringify(obj)).toString("base64")
-    const payload = JSON.parse(Buffer.from(kols, "base64").toString("utf-8"));
+    const payload = JSON.parse(
+      Buffer.from(kols, "base64").toString("utf-8")
+    ) as unknown;
     const parsed = schema.parse(payload);
     return parsed[id];
   } catch {
@@ -22,7 +24,7 @@ export async function POST(
 ) {
   const id = (await params).id;
   const secret = getSecret(id);
-  const { address } = await request.json();
+  const { address } = (await request.json()) as { address: string };
   if (!secret) return new Response("Invalid quest ID", { status: 400 });
   if (!address) return new Response("Missing address", { status: 400 });
 

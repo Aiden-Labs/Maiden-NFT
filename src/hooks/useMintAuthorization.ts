@@ -1,6 +1,6 @@
 import { GetDropsResponse } from "@liteflow/sdk/dist/client";
 import { useMemo } from "react";
-import { erc20Abi } from "viem";
+import { erc20Abi, getAddress } from "viem";
 import { useAccount, useBalance, useReadContract } from "wagmi";
 
 export default function useMintAuthorization(
@@ -18,20 +18,24 @@ export default function useMintAuthorization(
         BigInt(drop.price) > BigInt(0),
     },
   });
-  const tokenBalance = useReadContract({
-    abi: erc20Abi,
-    account: account.address,
-    chainId: drop.currency.chainId,
-    address: drop.currency.address! as `0x${string}`,
-    args: [account.address!],
-    functionName: "balanceOf",
-    query: {
-      enabled:
-        account.isConnected &&
-        !!drop.currency.address &&
-        BigInt(drop.price) > BigInt(0),
-    },
-  });
+  const tokenBalance = useReadContract(
+    drop.currency.address && account.address
+      ? {
+          abi: erc20Abi,
+          account: account.address,
+          chainId: drop.currency.chainId,
+          address: getAddress(drop.currency.address),
+          args: [account.address],
+          functionName: "balanceOf",
+          query: {
+            enabled:
+              account.isConnected &&
+              !!drop.currency.address &&
+              BigInt(drop.price) > BigInt(0),
+          },
+        }
+      : undefined
+  );
 
   const isLoading = useMemo(
     () => nativeBalance.isLoading || tokenBalance.isLoading,

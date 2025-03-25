@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useMemo } from "react";
-import { erc20Abi } from "viem";
+import { erc20Abi, getAddress } from "viem";
 import { waitForTransactionReceipt } from "viem/actions";
 import {
   useAccount,
@@ -17,8 +17,8 @@ export default function useApproval({
   spender,
 }: {
   chainId: number;
-  token: `0x${string}` | null;
-  spender: `0x${string}`;
+  token: string | null;
+  spender: string;
   amount: bigint;
 }) {
   const account = useAccount();
@@ -26,22 +26,25 @@ export default function useApproval({
     query: {
       enabled: !!account.address && !!token,
     },
-    contracts: [
-      {
-        abi: erc20Abi,
-        chainId,
-        address: token!,
-        functionName: "balanceOf",
-        args: [account.address!],
-      },
-      {
-        abi: erc20Abi,
-        chainId: chainId,
-        address: token!,
-        functionName: "allowance",
-        args: [account.address!, spender],
-      },
-    ],
+    contracts:
+      !!account.address && !!token
+        ? [
+            {
+              abi: erc20Abi,
+              chainId,
+              address: getAddress(token),
+              functionName: "balanceOf",
+              args: [account.address],
+            },
+            {
+              abi: erc20Abi,
+              chainId: chainId,
+              address: getAddress(token),
+              functionName: "allowance",
+              args: [account.address, getAddress(spender)],
+            },
+          ]
+        : undefined,
   });
   const [balance, allowance] = useMemo(() => data.data || [], [data.data]);
 
@@ -62,9 +65,9 @@ export default function useApproval({
       const hash = await approveTx.writeContractAsync({
         chainId: chainId,
         abi: erc20Abi,
-        address: token!,
+        address: getAddress(token),
         functionName: "approve",
-        args: [spender, amount],
+        args: [getAddress(spender), amount],
       });
       await waitForTransactionReceipt(client, { hash });
       await data.refetch();

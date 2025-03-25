@@ -30,7 +30,7 @@ export default function Drop() {
   const chain = useMemo(() => (client ? client.chain : null), [client]);
   const currentDrop = useMemo(() => {
     if (!drops.data) return null;
-    if (drops.data.data[0].status === "UPCOMING") return drops.data.data[0];
+    if (drops.data.data[0]?.status === "UPCOMING") return drops.data.data[0];
     const live = drops.data.data.find((drop) => drop.status === "LIVE");
     if (live) return live;
     return drops.data.data[drops.data.data.length - 1];
@@ -67,7 +67,7 @@ export default function Drop() {
             <h1 className="text-4xl font-semibold">{collection.data.name}</h1>
             {chain && (
               <span>
-                <Badge variant="secondary">{chain?.name}</Badge>
+                <Badge variant="secondary">{chain.name}</Badge>
               </span>
             )}
           </header>
@@ -105,7 +105,7 @@ export default function Drop() {
                   <>
                     <Separator />
                     <div className="py-6 md:px-6">
-                      {currentDrop && <ActiveStage drop={currentDrop} />}
+                      <ActiveStage drop={currentDrop} />
                     </div>
                   </>
                 )}
@@ -128,7 +128,10 @@ export default function Drop() {
               {chain && (
                 <Button variant="outline" asChild>
                   <a
-                    href={`${chain.blockExplorers?.default.url}/address/${collection.data.address}`}
+                    href={
+                      chain.blockExplorers &&
+                      `${chain.blockExplorers.default.url}/address/${collection.data.address}`
+                    }
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2"

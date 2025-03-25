@@ -30,8 +30,8 @@ export default function SuccessModal({
   const client = useClient({ chainId });
   const chain = useMemo(() => (client ? client.chain : null), [client]);
   const url = useMemo(() => {
-    if (!chain) return null;
-    return `${chain.blockExplorers?.default.url}/tx/${txHash}`;
+    if (!chain?.blockExplorers || !txHash) return null;
+    return `${chain.blockExplorers.default.url}/tx/${txHash}`;
   }, [chain, txHash]);
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>

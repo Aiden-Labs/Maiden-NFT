@@ -36,8 +36,8 @@ export default function ActiveStage({
   const approval = useApproval({
     amount,
     chainId: drop.chainId,
-    token: drop.currency.address as `0x${string}`,
-    spender: drop.collectionAddress as `0x${string}`,
+    token: drop.currency.address,
+    spender: drop.collectionAddress,
   });
   const mintAuthorization = useMintAuthorization(drop, amount);
   const mint = useMint(drop);
@@ -106,7 +106,7 @@ export default function ActiveStage({
               mintAuthorization.isLoading ||
               !!mintAuthorization.error
             }
-            onClick={handleMint}
+            onClick={() => void handleMint()}
           >
             {mint.isPending ? "Minting..." : "Mint"}
           </Button>

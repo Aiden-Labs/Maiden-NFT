@@ -2,7 +2,7 @@ import abi from "@/lib/abi";
 import liteflow from "@/lib/liteflow";
 import { GetDropsResponse } from "@liteflow/sdk/dist/client";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Address, Hex } from "viem";
+import { getAddress, Hex } from "viem";
 import { waitForTransactionReceipt } from "viem/actions";
 import { useAccount, useClient, useSwitchChain, useWriteContract } from "wagmi";
 
@@ -27,15 +27,15 @@ export default function useMint(drop: GetDropsResponse["data"][number]) {
         chainId: drop.chainId,
         abi: abi,
         functionName: "claim",
-        address: drop.collectionAddress as Address,
+        address: getAddress(drop.collectionAddress),
         value: BigInt(claim.data.overrides.value),
         args: [
-          claim.data.receiver as Address,
+          getAddress(claim.data.receiver),
           BigInt(claim.data.quantity),
-          claim.data.currency as Address,
+          getAddress(claim.data.currency),
           BigInt(claim.data.pricePerToken),
           {
-            currency: claim.data.allowlistProof.currency as Address,
+            currency: getAddress(claim.data.allowlistProof.currency),
             pricePerToken: BigInt(claim.data.allowlistProof.pricePerToken),
             quantityLimitPerWallet: BigInt(
               claim.data.allowlistProof.quantityLimitPerWallet
